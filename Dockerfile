@@ -2,7 +2,7 @@
 FROM golang:1.23
 
 # 作業ディレクトリを設定
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Go Modulesの使用を許可（必要な場合）
 # ENV GO111MODULE=on
@@ -16,7 +16,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # アプリケーションをビルド
-RUN go build -v -o /usr/local/bin/app ./...
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 
 # 実行可能ファイルをデフォルトのコマンドとして設定
-CMD ["app"]
+CMD ["/docker-gs-ping"]
