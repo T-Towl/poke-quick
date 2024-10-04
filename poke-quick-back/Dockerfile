@@ -8,9 +8,8 @@ WORKDIR /app
 # ENV GO111MODULE=on
 
 # ローカルのモジュールキャッシュを最適化（必要な場合）
-COPY go.mod ./
-# COPY go.sum ./
-# RUN go mod download && go mod verify
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
 
 
 # ソースコードをコンテナにコピー
