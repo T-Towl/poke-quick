@@ -1,0 +1,37 @@
+services:
+  db:
+    image: mysql:8.0.38
+    container_name: poke-quick-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sampledb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./poke-quick-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
+  backend:
+    build: ./poke-quick-back
+    container_name: poke-quick-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./poke-quick-back:/app
+    command: ["go", "run", "main.go"]
+    depends_on:
+      - db
+
+  frontend:
+    build: ./poke-quick-front
+    container_name: poke-quick-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
+
