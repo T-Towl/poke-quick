@@ -1,0 +1,10 @@
+national_id,name,english_name,type_id_1,type_id_2,ability_id_1,ability_id_2,ability_id_3,hit_point,attack,defense,special_attack,special_defense,speed,height,weight
+1,"フシギダネ","Bulbasaur",4,8,NULL,NULL,NULL,45,49,49,65,65,45,0.7,6.9
+2,"フシギソウ","Ivysaur",4,8,NULL,NULL,NULL,60,62,63,80,80,60,1.0,13.0
+3,"フシギバナ","Venusaur",4,8,NULL,NULL,NULL,80,82,83,100,100,80,2.0,100.0
+4,"ヒトカゲ","Charmander",2,NULL,NULL,NULL,NULL,39,52,43,60,50,65,0.6,8.5
+5,"リザード","Charmeleon",2,NULL,NULL,NULL,NULL,58,64,58,80,65,80,1.1,19.0
+6,"リザードン","Charizard",2,10,NULL,NULL,NULL,78,84,78,109,85,100,1.7,90.5
+7,"ゼニガメ","Squirtle",3,NULL,NULL,NULL,NULL,44,48,65,50,64,43,0.5,9.0
+8,"カメール","Wartortle",3,NULL,NULL,NULL,NULL,59,63,80,65,80,58,1.0,22.5
+9,"カメックス","Blastoise",3,NULL,NULL,NULL,NULL,79,83,100,85,105,78,1.6,85.5
