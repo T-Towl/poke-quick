@@ -24,7 +24,7 @@ An application that calculates the speed of Pokémon.
 	$ docker-compose up --build
 	```
 
-3. ブラウザで<http://localhost:8080/>にアクセスし、*Hello, Poke Quick!* と表示されれば環境構築は完了です。
+2. ブラウザで<http://localhost:8080/>にアクセスし、*Hello, Poke Quick!* と表示されれば環境構築は完了です。
 
 * (*補足*) 
 	``` shell

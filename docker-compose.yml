@@ -1,7 +1,7 @@
 services:
   db:
     image: mysql:8.0.38
-    container_name: poke-quick-db
+    container_name: database-container
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: sampledb
@@ -14,19 +14,19 @@ services:
       - "3306:3306"
 
   backend:
-    build: ./poke-quick-back
-    container_name: poke-quick-backend
+    build: ./backend
+    container_name: backend-container
     ports:
       - "8080:8080"
     volumes:
-      - ./poke-quick-back:/app
+      - ./backend:/app
     command: ["go", "run", "main.go"]
     depends_on:
       - db
 
   frontend:
-    build: ./poke-quick-front
-    container_name: poke-quick-frontend
+    build: ./frontend
+    container_name: frontend-container
     ports:
       - "3000:3000"
     depends_on:
