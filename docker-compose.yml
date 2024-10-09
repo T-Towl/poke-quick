@@ -1,21 +1,24 @@
 services:
   db:
-    image: mysql:8.0.38
-    container_name: database-container
+    build: ./database
+    container_name: poke_quick_database
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: sampledb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: poke_quick_db
+      MYSQL_USER: satoshi
+      MYSQL_PASSWORD: pikachu
+      MYSQL_ROOT_PASSWORD: masterball
     volumes:
       - db_data:/var/lib/mysql
-      - ./poke-quick-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/pokemon_data.csv:/docker-entrypoint-initdb.d/pokemon_data.csv
+      - ./database/config/my.cnf:/etc/mysql/conf.d/my.cnf
+    entrypoint: /bin/bash -c "chmod 644 /etc/mysql/conf.d/my.cnf && chown mysql:mysql /etc/mysql/conf.d/my.cnf && docker-entrypoint.sh mysqld"
     ports:
       - "3306:3306"
 
   backend:
     build: ./backend
-    container_name: backend-container
+    container_name: poke_quick_server
     ports:
       - "8080:8080"
     volumes:
@@ -26,7 +29,7 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: frontend-container
+    container_name: poke_quick_client
     ports:
       - "3000:3000"
     depends_on:
