@@ -3,10 +3,10 @@ services:
     image: mysql:8.0.38
     container_name: database-container
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: sampledb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: poke_quick_db
+      MYSQL_USER: satoshi
+      MYSQL_PASSWORD: pikachu
+      MYSQL_ROOT_PASSWORD: masterball
     volumes:
       - db_data:/var/lib/mysql
       - ./poke-quick-db/init.sql:/docker-entrypoint-initdb.d/init.sql
