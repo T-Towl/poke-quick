@@ -18,7 +18,7 @@ services:
 
   backend:
     build: ./backend
-    container_name: backend-container
+    container_name: poke_quick_server
     ports:
       - "8080:8080"
     volumes:
@@ -29,7 +29,7 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: frontend-container
+    container_name: poke_quick_client
     ports:
       - "3000:3000"
     depends_on:
