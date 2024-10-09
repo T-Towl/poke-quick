@@ -36,3 +36,52 @@ An application that calculates the speed of Pokémon.
 	// 停止した全Dockerコンテナを起動する場合のコマンド
 	$ docker stop $(docker ps -a -q)
 	```
+
+	### MySQLの接続確認
+	1.以下のコマンドを実行してMySQLに接続できることを確認してください
+	```shell
+	$ docker exec -it database-container mysql -u root -p
+	```
+
+## データベース構成
+
+### テーブル: `pokemon`
+| カラム名          | データ型       | NULL許可 | キー     | デフォルト値 | その他       |
+|-------------------|----------------|----------|----------|--------------|--------------|
+| id                | INT            | NO       | PRIMARY  |              | AUTO_INCREMENT |
+| national_id       | INT            | NO       | UNIQUE   |              |              |
+| name              | VARCHAR(255)   | NO       |          |              |              |
+| english_name      | VARCHAR(255)   | NO       |          |              |              |
+| type_id_1         | INT            | NO       | FOREIGN  |              |              |
+| type_id_2         | INT            | YES      | FOREIGN  |              |              |
+| ability_id_1      | INT            | NO       | FOREIGN  |              |              |
+| ability_id_2      | INT            | YES      | FOREIGN  |              |              |
+| ability_id_3      | INT            | YES      | FOREIGN  |              |              |
+| hit_point         | INT            | NO       |          |              |              |
+| attack            | INT            | NO       |          |              |              |
+| defense           | INT            | NO       |          |              |              |
+| special_attack    | INT            | NO       |          |              |              |
+| special_defense   | INT            | NO       |          |              |              |
+| speed             | INT            | NO       |          |              |              |
+| height            | FLOAT          | NO       |          |              |              |
+| weight            | FLOAT          | NO       |          |              |              |
+| image_url         | VARCHAR(255)   | YES      |          |              |              |
+
+### テーブル: `types`
+| カラム名          | データ型       | NULL許可 | キー     | デフォルト値 | その他       |
+|-------------------|----------------|----------|----------|--------------|--------------|
+| id                | INT            | NO       | PRIMARY  |              | AUTO_INCREMENT |
+| type_name         | VARCHAR(255)   | NO       | UNIQUE   |              |              |
+| english_type_name | VARCHAR(255)   | NO       | UNIQUE   |              |              |
+
+### テーブル: `abilities`
+| カラム名          | データ型       | NULL許可 | キー     | デフォルト値 | その他       |
+|-------------------|----------------|----------|----------|--------------|--------------|
+| id                | INT            | NO       | PRIMARY  |              | AUTO_INCREMENT |
+| ability_name      | VARCHAR(255)   | NO       | UNIQUE   |              |              |
+| battle_effect     | TEXT           | YES      |          |              |              |
+| field_effect      | TEXT           | YES      |          |              |              |
+
+## リレーション
+- `pokemon` テーブルの `type_id_1` と `type_id_2` は `types` テーブルの `id` とリレーションを持ちます。
+- `pokemon` テーブルの `ability_id_1`、`ability_id_2`、`ability_id_3` は `abilities` テーブルの `id` とリレーションを持ちます。
